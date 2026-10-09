@@ -2794,6 +2794,40 @@ function slitFrame(x, w, h){
 }
 
 /* ================= DÖNGÜ ================= */
+/* Telefon: efekt önizlemeleri kameradan çizilmez; efektin renk ayarlarından üretilen hafif bir renk kartı gösterilir (WebGL yok). */
+const SWC = new WeakMap();
+function swatchOf(P){
+  let c = SWC.get(P); if (c) return c;
+  c = canvasOf(112, 112); const x = c.getContext("2d"), S = 112;
+  const cl = v => Math.max(0, Math.min(1, v)), n = k => +P[k] || 0;
+  const temp = n("temp"), tint = n("tint"), sat = n("sat"), exp = n("exp"), con = n("con");
+  const sc = Array.isArray(P.sc) ? P.sc : [0,0,0], hc = Array.isArray(P.hc) ? P.hc : [0,0,0];
+  const base = .5 + exp*.25, rgb = [base + temp*.22 + tint*.12, base - tint*.2, base - temp*.22 + tint*.12];
+  const stop = (k, add) => {
+    let v = rgb.map((b, i) => cl(b*k + add[i]*2.2 + (k < 1 ? .02 : 0)));
+    const m = (v[0] + v[1] + v[2])/3; v = v.map(q => q + (q - m)*(sat*1.2));
+    if (P.bw){ const g = (v[0] + v[1] + v[2])/3; v = [g, g, g]; }
+    const mid = rgb.map(b => cl(b*.8)); v = v.map((q, i) => cl(mid[i] + (q - mid[i])*(1 + con*.8)));
+    return "rgb(" + v.map(q => Math.round(q*255)).join(",") + ")";
+  };
+  const g = x.createLinearGradient(0, S, S, 0); g.addColorStop(0, stop(.32, sc)); g.addColorStop(1, stop(1.45, hc));
+  x.fillStyle = g; x.fillRect(0, 0, S, S);
+  if (n("fade") > 0){ x.fillStyle = "rgba(205,205,205," + Math.min(.5, n("fade")*.6) + ")"; x.fillRect(0, 0, S, S); }
+  if (n("glow") > 0 || n("flash") > 0){ const r = x.createRadialGradient(S*.3, S*.3, 2, S*.3, S*.3, S*.8); r.addColorStop(0, "rgba(255,255,255," + Math.min(.7, n("glow")*.8 + n("flash")*.5) + ")"); r.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = r; x.fillRect(0, 0, S, S); }
+  if (n("vig") > 0){ const r = x.createRadialGradient(S/2, S/2, S*.25, S/2, S/2, S*.75); r.addColorStop(0, "rgba(0,0,0,0)"); r.addColorStop(1, "rgba(0,0,0," + Math.min(.8, n("vig")*1.6) + ")"); x.fillStyle = r; x.fillRect(0, 0, S, S); }
+  if (n("grain") > .1){ x.fillStyle = "rgba(255,255,255,.18)"; for (let i = 0; i < 90; i++) x.fillRect(Math.random()*S, Math.random()*S, 1.5, 1.5); }
+  SWC.set(P, c); return c;
+}
+function paintSwatches(){
+  const N = PRESETS.length, open = !$("#sheet").hidden;
+  for (let i = 0; i < N; i++){
+    const lt = lensSet === "filters" ? lensThumbs[i] : null, st = open && thumbs[i] && !document.getElementById("pr-"+i).hidden;
+    if (!lt && !st) continue;
+    const c = swatchOf(PRESETS[i]);
+    if (st) thumbs[i].drawImage(c, 0, 0);
+    if (lt) lt.drawImage(c, 0, 0);
+  }
+}
 let thumbsDue = 0;
 let thumbPos = 0, thumbLeft = 0, thumbPass = 0;
 function renderThumbs(now, budget){
@@ -2819,15 +2853,9 @@ function loop(now){
     if (G.id && G.g && (G.g.need === "live" || MOTION_GAMES.has(G.id))) sampleMotion();
     if ((G.id && G.g && (G.g.need === "face" || G.g.roul || G.id === "bumu" || G.id === "kafatopu")) || FACEFX.warp || FACEFX.mask || beautyFace()) trackFace(now);
   }
+  if (LITE && now > thumbsDue){ try { paintSwatches(); } catch(e){ console.error(e); } thumbsDue = 1e9; }
   if (!useLive && !still) return;
-  if (now > thumbsDue){
-    if (LITE && useLive){
-      /* Telefon: önizlemeler sürekli çizilmez. 2 kez (kamera pozu oturunca yenilenir) azar azar çizilir, sonra durur. */
-      if (thumbsDue === 0){ thumbLeft = PRESETS.length; thumbPass = 0; }
-      if (thumbLeft > 0){ thumbLeft -= Math.max(1, renderThumbs(now, 3)); thumbsDue = now + 220; }
-      if (thumbLeft <= 0){ if (++thumbPass < 2){ thumbLeft = PRESETS.length; thumbsDue = now + 3000; } else thumbsDue = 1e9; }
-    } else { renderThumbs(now); thumbsDue = now + (useLive ? 1200 : 1e9); }
-  }
+  if (!LITE && now > thumbsDue){ renderThumbs(now); thumbsDue = now + (useLive ? 1200 : 1e9); }
   draw(P, glc.width, glc.height, AR[ari][1], now/1000, still ? still.mirror : mirror, true);
   decorate(deco.getContext("2d"), deco.width, deco.height, P);
   longFrame(now); tlFrame(now);
