@@ -1204,23 +1204,49 @@ async function doDouble(){
 }
 
 /* ---------- Uzun pozlama ---------- */
-const LONG = {on:false, acc:null, end:0, dur:4000};
+const LIGHTS = {
+  cok:   {l:"🌑 Çok karanlık",  dur:8000, gain:2.6},
+  biraz: {l:"🌘 Biraz karanlık", dur:4000, gain:1.6},
+  aydin: {l:"☀️ Aydınlık",       dur:2000, gain:1}
+};
+const LONG = {on:false, acc:null, end:0, dur:4000, light:"oto", durManual:false, cur:"aydin", gain:1};
+function sceneLuma(){
+  try {
+    const t = canvasOf(16, 16), x = t.getContext("2d", {willReadFrequently:true}); x.drawImage(glc, 0, 0, 16, 16);
+    const d = x.getImageData(0, 0, 16, 16).data; let sum = 0;
+    for (let i = 0; i < d.length; i += 4) sum += .2126*d[i] + .7152*d[i+1] + .0722*d[i+2];
+    return sum / (d.length/4);
+  } catch(e){ return 128; }
+}
+function pickLight(){
+  if (LONG.light !== "oto") return LONG.light;
+  const y = sceneLuma(); return y < 45 ? "cok" : y < 100 ? "biraz" : "aydin";
+}
+function drawGain(x, src, w, h, g){
+  x.globalCompositeOperation = "source-over"; x.globalAlpha = 1; x.drawImage(src, 0, 0, w, h);
+  let rem = g - 1; x.globalCompositeOperation = "lighter";
+  while (rem > .02){ x.globalAlpha = Math.min(1, rem); x.drawImage(src, 0, 0, w, h); rem -= 1; }
+  x.globalCompositeOperation = "source-over"; x.globalAlpha = 1;
+}
 function startLong(){
   if (!live || still) return needLive();
   if (LONG.on) return finishLong();
+  LONG.cur = pickLight(); const L = LIGHTS[LONG.cur]; LONG.gain = L.gain;
+  if (!LONG.durManual) LONG.dur = L.dur;
+  if (LONG.light === "oto") toast("Otomatik: " + L.l.replace(/^\S+\s/, "").toLowerCase() + " · " + (LONG.dur/1000) + " sn");
   LONG.acc = canvasOf(glc.width, glc.height); LONG.on = true; LONG.end = performance.now() + LONG.dur;
   LONG.acc.getContext("2d").drawImage(glc, 0, 0); tick(660,.1,"sine",.06); $("#shutter").classList.add("recording");
 }
 function longFrame(now){
   if (!LONG.on) return;
   const x = LONG.acc.getContext("2d"); x.globalCompositeOperation = "lighten"; x.drawImage(glc, 0, 0, LONG.acc.width, LONG.acc.height); x.globalCompositeOperation = "source-over";
-  const dx = deco.getContext("2d"); dx.drawImage(LONG.acc, 0, 0, deco.width, deco.height);
+  const dx = deco.getContext("2d"); drawGain(dx, LONG.acc, deco.width, deco.height, LONG.gain);
   const left = Math.max(0, LONG.end - now); $("#recTag").hidden = false; $("#recTag").textContent = `● UZUN POZ ${(left/1000).toFixed(1)}`;
   if (left <= 0) finishLong();
 }
 async function finishLong(){
   if (!LONG.on) return; LONG.on = false; $("#shutter").classList.remove("recording"); $("#recTag").hidden = true;
-  const c = canvasOf(LONG.acc.width, LONG.acc.height), x = c.getContext("2d"); x.drawImage(LONG.acc, 0, 0);
+  const c = canvasOf(LONG.acc.width, LONG.acc.height), x = c.getContext("2d"); drawGain(x, LONG.acc, c.width, c.height, LONG.gain);
   const d2 = canvasOf(c.width, c.height); decorate(d2.getContext("2d"), c.width, c.height, P); x.drawImage(d2, 0, 0);
   shutterSound(); await addCanvas(c, "uzun"); toast("Uzun pozlama hazır");
 }
@@ -1360,7 +1386,11 @@ function renderModebar(){
   if (mode === "kabin") BOOTH.forEach((b, i) => mb.appendChild(chip(b[0], () => { boothStyle = i; renderModebar(); }, i === boothStyle)));
   if (mode === "cift"){ BLENDS.forEach(([k, l]) => mb.appendChild(chip(l, () => { DBL.blend = k; $("#onion").style.mixBlendMode = k; renderModebar(); }, DBL.blend === k)));
     if (DBL.a) mb.appendChild(chip("Baştan", () => { DBL.a = null; $("#onion").hidden = true; renderModebar(); }, null, "warn")); }
-  if (mode === "uzun") [[2000,"2 sn"],[4000,"4 sn"],[8000,"8 sn"]].forEach(([d, l]) => mb.appendChild(chip(l, () => { LONG.dur = d; renderModebar(); }, LONG.dur === d)));
+  if (mode === "uzun"){
+    mb.appendChild(chip("✨ Otomatik", () => { LONG.light = "oto"; LONG.durManual = false; renderModebar(); }, LONG.light === "oto"));
+    Object.entries(LIGHTS).forEach(([k, L]) => mb.appendChild(chip(L.l, () => { LONG.light = k; LONG.durManual = false; LONG.dur = L.dur; LONG.gain = L.gain; renderModebar(); }, LONG.light === k)));
+    [[2000,"2 sn"],[4000,"4 sn"],[8000,"8 sn"]].forEach(([d, l]) => mb.appendChild(chip(l, () => { LONG.dur = d; LONG.durManual = true; renderModebar(); }, LONG.dur === d)));
+  }
   if (mode === "stop"){
     mb.appendChild(chip(`<b>${STOP.frames.length}</b> kare`, () => {}, null));
     mb.appendChild(chip(`${STOP.fps} fps`, () => { STOP.fps = STOP.fps === 8 ? 12 : STOP.fps === 12 ? 4 : 8; renderModebar(); }));
