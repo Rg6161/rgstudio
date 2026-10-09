@@ -828,7 +828,7 @@ function setStill(full, opts = {}){
 }
 function goLive(){ if (!stream) return startCamera(); still = null; $("#tag").hidden = true; P.poster = null; $("#aiClear").hidden = true; updateUI(); }
 
-const LITE = (()=>{ try { return matchMedia("(pointer:coarse)").matches || Math.min(screen.width, screen.height) < 700; } catch(e){ return false; } })();
+const LITE = (()=>{ try { return matchMedia("(pointer:coarse)").matches || Math.min(screen.width, screen.height) < 700 || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); } catch(e){ return false; } })();
 function getCam(c){ return navigator.mediaDevices.getUserMedia({video:Object.assign(LITE ? {width:{ideal:1280}, height:{ideal:720}, frameRate:{ideal:30, max:30}} : {width:{ideal:1920}, height:{ideal:1080}}, c), audio:false}); }
 async function attachStream(){
   video.srcObject = stream; await video.play(); live = true; still = null;
@@ -2796,6 +2796,14 @@ function slitFrame(x, w, h){
 /* ================= DÖNGÜ ================= */
 /* Telefon: efekt önizlemeleri kameradan çizilmez; efektin renk ayarlarından üretilen hafif bir renk kartı gösterilir (WebGL yok). */
 const SWC = new WeakMap();
+const ICONS = {"Orijinal":"⭕","Temiz Cilt":"✨","Dijital Kamera":"📷","Tek Kullanımlık":"📸","Y2K Parıltı":"💿","Soft Pembe":"🌸","Kırmızı Kalsın":"🔴","8-Bit":"👾","Gece Görüşü":"🦉","Neon Gece":"🌃","Pop Art":"💥","Vaporwave":"🌴","Kızılötesi":"🔥",
+"Porselen":"🤍","Bal":"🍯","Gül Kurusu":"🥀","Şeftali":"🍑","Işıltı":"💫","Kore Soft":"🧸",
+"Çöl Gezegeni":"🏜️","Paris Masalı":"🗼","Neon Şehir":"🏙️","Pastel Otel":"🏨","Gece Taksisi":"🚕","Aile Babası":"🏠","Distopya":"🏭","Yaz Aşkı":"🏖️",
+"Çizgi Roman":"💭","Karakalem":"✏️","Neon Kontur":"🔷","Gazete":"📰","Pop Noktası":"🔵","Suluboya":"🎨","Animasyon":"🖍️",
+"Gişe":"🎟️","Tungsten":"💡","Mat Sinema":"🎥","Kuzey":"❄️","Western":"🤠","Kod Yeşili":"💻","Yeşilçam":"📽️","Noir":"🕵️","Bleach":"🧼","Hong Kong '94":"🏮","Gerilim":"😱","Simetri":"🪞","Mars":"🪐","Derin Okyanus":"🌊","Technicolor":"🌈","Projektör":"🔦","Film Yanığı":"🔥","Ay Işığı":"🌕",
+"Kodak Altın":"🟡","Fuji Yeşil":"🟢","Ektachrome":"🔵","Print 2383":"🎞️","Polaroid":"🖼️","Instax":"📷","Lomo":"🌀","Tri-X":"⚫","Altın Saat":"🌇","Kodachrome":"🟥","Velvia":"🌿","Portra 800":"👩","HP5":"⬜","Super 16":"🎞️","Cinestill 50":"🌆",
+"Yaz '74":"🌻","Kaset 80":"📼","VHS":"📺","Super 8":"🎥","Sepya":"🟤","1920":"🎩","Kartpostal 60":"✉️","Dagerotip":"🏛️","Game Boy":"🎮",
+"Rüya":"☁️","Pastel":"🍬","Kahve":"☕","Kış":"⛄","Sis":"🌫️","Grunge":"🎸","Duotone":"🎭","Yağmur":"🌧️","Termal":"🌡️"};
 function swatchOf(P){
   let c = SWC.get(P); if (c) return c;
   c = canvasOf(112, 112); const x = c.getContext("2d"), S = 112;
@@ -2816,6 +2824,9 @@ function swatchOf(P){
   if (n("glow") > 0 || n("flash") > 0){ const r = x.createRadialGradient(S*.3, S*.3, 2, S*.3, S*.3, S*.8); r.addColorStop(0, "rgba(255,255,255," + Math.min(.7, n("glow")*.8 + n("flash")*.5) + ")"); r.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = r; x.fillRect(0, 0, S, S); }
   if (n("vig") > 0){ const r = x.createRadialGradient(S/2, S/2, S*.25, S/2, S/2, S*.75); r.addColorStop(0, "rgba(0,0,0,0)"); r.addColorStop(1, "rgba(0,0,0," + Math.min(.8, n("vig")*1.6) + ")"); x.fillStyle = r; x.fillRect(0, 0, S, S); }
   if (n("grain") > .1){ x.fillStyle = "rgba(255,255,255,.18)"; for (let i = 0; i < 90; i++) x.fillRect(Math.random()*S, Math.random()*S, 1.5, 1.5); }
+  const ic = ICONS[String(P.name || "").replace(/^✦\s*/, "")] || (P.cat === "benim" || P.xref ? "⭐" : "🎞️");
+  x.globalAlpha = .9; x.font = "54px system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif"; x.textAlign = "center"; x.textBaseline = "middle";
+  x.shadowColor = "rgba(0,0,0,.35)"; x.shadowBlur = 8; x.fillText(ic, S/2, S/2 + 3); x.shadowBlur = 0; x.globalAlpha = 1;
   SWC.set(P, c); return c;
 }
 function paintSwatches(){
@@ -2949,6 +2960,7 @@ restoreMine(); catCounts(); camUI(); focusUI(); syncControls(); layout(); update
 setTimeout(() => { if (live){ const n = $("#notice"); n.hidden = false; n.innerHTML = "<b>Kaydırarak seç:</b> vizörde sağa-sola filtre, yukarı-aşağı mod. Alttaki dairelerde de kaydırabilirsin. İki parmak ya da tekerlekle yakınlaştır."; setTimeout(() => n.hidden = true, 6000); } }, 2500);
 requestAnimationFrame(() => centerMode(mode, false));
 requestAnimationFrame(loop);
+if (LITE) setTimeout(() => { try { toast("Hafif mod açık · telefon"); } catch(e){} }, 1400);
 startCamera();
 })();
 </script>
