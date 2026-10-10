@@ -1,6 +1,6 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Kare</title>
-<meta name="robots" content="noindex,nofollow,noarchive">
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090b"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Kare"></head><body><title>Kare</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600&family=IBM+Plex+Mono:wght@400;600&family=Manrope:wght@400;600;700;800&family=Unbounded:wght@600;800&display=swap">
@@ -54,11 +54,16 @@ button:disabled{opacity:.4;cursor:default}
 .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 .flash.go{animation:flash .45s ease-out}
 @keyframes flash{0%{opacity:.95}100%{opacity:0}}
-.pill{position:absolute;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);padding:5px 9px;border-radius:999px;color:var(--fg);pointer-events:none}
+.pill{position:absolute;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:rgba(14,14,17,.74);border:1px solid var(--line);padding:5px 9px;border-radius:999px;color:var(--fg);pointer-events:none}
 .tag{top:12px;left:12px;color:var(--muted)}
+.fxchip{top:12px;left:50%;transform:translateX(-50%);pointer-events:auto;display:flex;align-items:center;gap:7px;padding:6px 8px 6px 11px;font-weight:600;letter-spacing:.06em;text-transform:none;font-family:var(--f-body);font-size:12.5px;max-width:calc(100% - 120px);white-space:nowrap;border-color:rgba(255,160,53,.45);animation:chipIn .22s ease-out}
+.fxchip span{overflow:hidden;text-overflow:ellipsis}
+.fxchip b{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.14);font-size:11px;flex:none}
+@keyframes chipIn{from{opacity:0;transform:translate(-50%,-6px)}to{opacity:1;transform:translate(-50%,0)}}
+.vp canvas{will-change:auto}
 .rec{top:12px;right:12px;background:rgba(255,75,58,.92);border-color:transparent;font-variant-numeric:tabular-nums}
 .back{top:12px;left:12px;pointer-events:auto;display:flex;gap:6px;align-items:center;font-weight:600}
-.notice{position:absolute;left:12px;right:12px;bottom:12px;font-size:12px;line-height:1.45;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);padding:9px 11px;border-radius:12px;pointer-events:none}
+.notice{position:absolute;left:12px;right:12px;bottom:12px;font-size:12px;line-height:1.45;background:rgba(14,14,17,.8);border:1px solid var(--line);padding:9px 11px;border-radius:12px;pointer-events:none}
 .notice b{color:var(--accent)}
 .devlabel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--f-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);opacity:0;pointer-events:none;text-shadow:0 0 12px rgba(0,0,0,.8)}
 .vp.develop .devlabel{animation:dl 1.9s ease-out}
@@ -72,7 +77,7 @@ button:disabled{opacity:.4;cursor:default}
 .polout .card{width:min(74%,420px);background:#f3efe6;padding:5% 5% 20%;border-radius:3px;box-shadow:0 30px 60px rgba(0,0,0,.55);transform:rotate(-2.5deg);animation:eject 1.1s cubic-bezier(.2,.8,.2,1) both;position:relative}
 .polout img{display:block;width:100%;aspect-ratio:1;object-fit:cover;animation:polDev 5s ease-out both}
 .polout p{position:absolute;left:0;right:0;bottom:4.5%;margin:0;text-align:center;font-family:var(--f-hand);font-size:clamp(18px,5vw,30px);color:#2b2620}
-.polout small{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.75);transform:translateY(calc(100% + 26px))}
+.polout small{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.8);text-shadow:0 1px 4px rgba(0,0,0,.8)}
 @keyframes eject{0%{transform:translateY(70%) rotate(0);opacity:0}100%{transform:translateY(0) rotate(-2.5deg);opacity:1}}
 @keyframes polDev{0%{filter:brightness(.25) sepia(1) hue-rotate(150deg) saturate(.3)}45%{filter:brightness(.8) sepia(.5) saturate(.6)}100%{filter:none}}
 
@@ -134,8 +139,10 @@ button:disabled{opacity:.4;cursor:default}
 .ideas{display:flex;gap:6px;flex-wrap:wrap}
 .ideas button{font-size:11px;color:var(--muted);border:1px dashed var(--line2);border-radius:999px;padding:5px 10px}
 
-.dock{display:flex;gap:2px;justify-content:center;align-items:center;overflow-x:auto;scrollbar-width:none;padding:0 12px}
-.tab{flex:none;display:grid;justify-items:center;gap:3px;padding:6px 9px;border-radius:12px;color:var(--muted);font-size:10.5px;font-weight:700;min-width:52px}
+.dock{display:flex;gap:6px;align-items:center;padding:0 10px 0 12px;min-width:0}
+.tabs{display:flex;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;mask-image:linear-gradient(90deg,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;display:grid;justify-items:center;gap:3px;padding:6px 9px;border-radius:12px;color:var(--muted);font-size:10.5px;font-weight:700;min-width:52px}
 .tab svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .tab[aria-selected="true"]{color:var(--fg);background:var(--surface)}
 .tab .n{font-family:var(--f-mono);font-size:9px;color:var(--accent);margin-left:2px}
@@ -204,7 +211,8 @@ button:disabled{opacity:.4;cursor:default}
 .save-sheet img,.save-sheet video{max-width:100%;max-height:100%;margin:auto;display:block;border-radius:6px;object-fit:contain}
 .save-sheet p{margin:0;text-align:center;font-size:14px;color:var(--muted)}
 .save-sheet button{justify-self:center;padding:10px 22px;border-radius:999px;border:1px solid var(--line2);font-weight:700}
-@media (max-width:420px){.logo .word{font-size:18px}.edge{display:none}.tab{min-width:46px;padding:6px 6px}}
+@media (max-width:420px){.logo .word{font-size:18px}.edge{display:none}.tab{min-width:40px;padding:6px 2px;font-size:10px}.dock{gap:4px;padding:0 8px}.dock .side{padding:0 2px}.gthumb{width:38px;height:38px}.tab .n{display:none}.top{gap:6px;padding:8px 12px 6px}.hbtn{height:32px;min-width:32px;padding:0 8px}}
+@media (max-width:360px){.logo .word{display:none}}
 @media (prefers-reduced-motion:reduce){.vp.develop #gl,.flash.go,.vp.develop .devlabel,.count span,.polout .card,.polout img{animation:none}}
 </style>
 
@@ -218,7 +226,9 @@ button:disabled{opacity:.4;cursor:default}
     <button class="hbtn" id="sfxBtn" aria-label="Uygulama sesleri"><svg viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10z"/><path id="sfxWave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
     <button class="hbtn" id="timerBtn" aria-label="Zamanlayıcı"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg><span id="timerLabel"></span></button>
     <button class="hbtn" id="arBtn" aria-label="En boy oranı">3:4</button>
-    <div class="camseg" id="camSeg" role="group" aria-label="Kamera"><button id="camFront" aria-pressed="true">Ön</button><button id="camBack" aria-pressed="false">Arka</button></div>
+    <button class="hbtn" id="rightBtn" aria-label="Sürpriz filtre"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg></button>
+    <div class="camseg" id="camSeg" role="group" aria-label="Kamera" hidden><button id="camFront" aria-pressed="true">Ön</button><button id="camBack" aria-pressed="false">Arka</button></div>
+    <button class="hbtn" id="camFlip" aria-label="Kamerayı değiştir"><svg viewBox="0 0 24 24"><path d="M4 8h11l-3-3M20 16H9l3 3"/></svg><span id="camFlipL">Ön</span></button>
     <button class="hbtn" id="flipBtn" aria-label="Kamerayı çevir" hidden><svg viewBox="0 0 24 24"><path d="M4 8h11l-3-3M20 16H9l3 3"/></svg></button>
   </header>
 
@@ -236,6 +246,7 @@ button:disabled{opacity:.4;cursor:default}
       <div class="pill zoom" id="zoomPill" hidden>1.0×</div>
       <div class="devlabel">Banyo ediliyor</div>
       <div class="pill tag" id="tag" hidden>Örnek kare</div>
+      <button class="pill fxchip" id="fxChip" hidden></button>
       <button class="pill back" id="backBtn" hidden>← Kamera</button>
       <div class="pill rec" id="recTag" hidden>● REC 00:00</div>
       <div class="count" id="count"></div>
@@ -279,8 +290,7 @@ button:disabled{opacity:.4;cursor:default}
         <div class="chiprow"><button class="chip" id="micBtn">🎙️ Mikrofonu aç</button><button class="chip" id="monBtn" aria-pressed="false">🎧 Kendini dinle</button><button class="chip" id="vnoteBtn">● 5 sn ses kaydı</button><button class="chip go" id="vfileBtn">🎵 Ses ya da videoya uygula</button></div>
         <div class="hint" id="voiceHint">Ses efekti videoya da işlenir. Kendini dinlerken kulaklık tak, yoksa hoparlör cızırdar.</div>
       </div>
-      <div class="panel" data-panel="adjust" hidden><div class="sliders" id="adjust"></div></div>
-      <div class="panel" data-panel="fx" hidden><div class="sliders" id="fx"></div></div>
+      <div class="panel" data-panel="adjust" hidden><div class="subh">Işık ve renk</div><div class="sliders" id="adjust"></div><div class="subh">Film dokusu ve efektler</div><div class="sliders" id="fx"></div></div>
       <div class="panel" data-panel="ai" hidden>
         <div class="ai">
           <form id="aiForm">
@@ -305,18 +315,16 @@ button:disabled{opacity:.4;cursor:default}
       <div class="lensrow" id="lensrow"></div>
       <button class="shutter" id="shutter" aria-label="Fotoğraf çek"><i id="shutterLabel"></i><svg viewBox="0 0 84 84"><circle id="recRing" cx="42" cy="42" r="40"/></svg></button>
     </div>
-    <nav class="dock" role="tablist">
+    <nav class="dock">
       <button class="side" id="leftBtn" aria-label="Film şeridini aç"><span class="gthumb"><canvas id="galThumb" width="92" height="92"></canvas><em id="galCount" hidden>0</em></span></button>
-      <button class="tab" role="tab" aria-selected="true" data-tab="presets" id="tb-presets"><svg viewBox="0 0 24 24"><circle cx="9" cy="10" r="5.5"/><circle cx="15" cy="10" r="5.5"/><circle cx="12" cy="15" r="5.5"/></svg><span>Filtre<span class="n" id="presetCount"></span></span></button>
+      <div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-tab="presets" id="tb-presets"><svg viewBox="0 0 24 24"><circle cx="9" cy="10" r="5.5"/><circle cx="15" cy="10" r="5.5"/><circle cx="12" cy="15" r="5.5"/></svg><span>Filtre<span class="n" id="presetCount"></span></span></button>
       <button class="tab" role="tab" aria-selected="false" data-tab="games" id="tb-games"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="5"/><path d="M8 11v3M6.5 12.5h3"/><circle cx="15.5" cy="11.5" r=".8"/><circle cx="17.5" cy="13.5" r=".8"/></svg><span>Oyun<span class="n" id="gameCount"></span></span></button>
       <button class="tab" role="tab" aria-selected="false" data-tab="face" id="tb-face"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg><span>Yüz</span></button>
       <button class="tab" role="tab" aria-selected="false" data-tab="beauty" id="tb-beauty"><svg viewBox="0 0 24 24"><path d="M12 3c2 3 6 4 6 9a6 6 0 0 1-12 0c0-5 4-6 6-9z"/><path d="M9.5 13.5c.8 1 1.6 1.5 2.5 1.5s1.7-.5 2.5-1.5"/></svg><span>Güzellik</span></button>
       <button class="tab" role="tab" aria-selected="false" data-tab="focus" id="tb-focus"><svg viewBox="0 0 24 24"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><circle cx="12" cy="12" r="3"/></svg><span>Odak</span></button>
       <button class="tab" role="tab" aria-selected="false" data-tab="voice" id="tb-voice"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Ses</span></button>
       <button class="tab" role="tab" aria-selected="false" data-tab="adjust" id="tb-adjust"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span>Ayar</span></button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="fx" id="tb-fx"><svg viewBox="0 0 24 24"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg><span>Efekt</span></button>
-      <button class="tab ai" role="tab" aria-selected="false" data-tab="ai" id="tb-ai" hidden><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M16.5 16.5L19 19M5 19l2.5-2.5M16.5 7.5L19 5"/></svg><span>AI</span></button>
-      <button class="side" id="rightBtn" aria-label="Sürpriz filtre"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg></button>
+      <button class="tab ai" role="tab" aria-selected="false" data-tab="ai" id="tb-ai" hidden><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M16.5 16.5L19 19M5 19l2.5-2.5M16.5 7.5L19 5"/></svg><span>AI</span></button></div>
     </nav>
   </section>
 </div>
@@ -464,7 +472,7 @@ const video = $("#video"), vp = $("#vp"), glc = $("#gl"), deco = $("#deco"), gam
 const FX_STATE = {split:0, ghostBoost:0};
 
 /* ================= WEBGL ================= */
-const gl = glc.getContext("webgl", {preserveDrawingBuffer:true, antialias:false, premultipliedAlpha:false});
+const gl = glc.getContext("webgl", {preserveDrawingBuffer:false, antialias:false, premultipliedAlpha:false, alpha:false, depth:false, stencil:false, desynchronized:true, powerPreference:"high-performance"});
 const VS = `attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}`;
 const FS = `precision highp float;
 varying vec2 v;
@@ -690,15 +698,18 @@ function updateSrcStats(force){
   try { const st = colorStats(blurX.getImageData(0, 0, blurC.width, blurC.height).data, blurC.width, blurC.height, false); if (st){ SRCST.m = st.m; SRCST.s = st.s; } } catch(e){}
 }
 const tiny = document.createElement("canvas"), tinyX = tiny.getContext("2d");
-let srcW = 1, srcH = 1;
+let srcW = 1, srcH = 1, upN = 0;
 function upload(src, w, h){
   srcW = w; srcH = h;
   gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texT);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, src);
-  const bw = 64, bh = Math.max(1, Math.round(64*h/w));
-  tiny.width = 16; tiny.height = Math.max(1, Math.round(16*h/w));
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, src);
+  const bw = 64, bh = Math.max(1, Math.round(64*h/w)), th = Math.max(1, Math.round(16*h/w));
+  const resized = tiny.width !== 16 || tiny.height !== th || blurC.width !== bw || blurC.height !== bh;
+  if (!resized && src === video && (++upN & 1)) return;
+  if (tiny.width !== 16 || tiny.height !== th){ tiny.width = 16; tiny.height = th; }
   tinyX.drawImage(src, 0, 0, tiny.width, tiny.height);
-  blurC.width = bw; blurC.height = bh; blurX.imageSmoothingQuality = "high"; blurX.drawImage(tiny, 0, 0, bw, bh);
+  if (blurC.width !== bw || blurC.height !== bh){ blurC.width = bw; blurC.height = bh; }
+  blurX.imageSmoothingQuality = "high"; blurX.drawImage(tiny, 0, 0, bw, bh);
   gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texB);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, blurC);
   if (P && P.xref) updateSrcStats(!live || !!still);
@@ -706,8 +717,8 @@ function upload(src, w, h){
 function cropFor(ar){ const sa = srcW/srcH; return sa > ar ? [(1-ar/sa)/2, 0, ar/sa, 1] : [0, (1-sa/ar)/2, 1, sa/ar]; }
 function barFor(ar, P){ if (!P.lb) return 0; return ar >= 1.9 ? 0 : ar >= 1 ? (1 - ar/2.39)/2 : .085; }
 const UMAP = {uExp:"exp",uCon:"con",uSat:"sat",uTemp:"temp",uTint:"tint",uFade:"fade",uClar:"clar",uTo:"to",uMist:"mist",uGt:"gt",uTherm:"therm",uGrain:"grain",uVig:"vig",uHal:"hal",uLeak:"leak",uCa:"ca",uDust:"dust",uFlick:"flick",uWeave:"weave",uVhs:"vhs",uSplit:"split",uGlow:"glow",uSharp:"sharp",uFlash:"flash",uPix:"pix",uKeep:"keep",uIr:"ir",uPost:"post",uToon:"toon",uSketch:"sketch",uNeon:"neon",uDots:"dots",uTech:"tech",uBurn:"burn"};
-function draw(P, w, h, ar, time, mir, main){
-  gl.viewport(0, 0, w, h);
+function draw(P, w, h, ar, time, mir, main, ox){
+  gl.viewport(ox || 0, 0, w, h);
   gl.uniform2f(U.R, w, h); gl.uniform4fv(U.C, cropFor(ar)); gl.uniform1f(U.M, mir ? 1 : 0);
   gl.uniform1f(U.t, time); gl.uniform1f(U.sd, seed);
   for (const k in UMAP) gl.uniform1f(U[k], +P[UMAP[k]] || 0);
@@ -736,6 +747,11 @@ function draw(P, w, h, ar, time, mir, main){
 }
 
 /* ================= ÜST KATMAN ================= */
+function layerOn(c){ if (c._on !== true){ c._on = true; c.style.visibility = "visible"; } return c.getContext("2d"); }
+function layerOff(c){ if (c._on !== false){ c.getContext("2d").clearRect(0, 0, c.width, c.height); c._on = false; c.style.visibility = "hidden"; } }
+const needDeco = P => !!(P.date || P.vhs > .2 || P.frame || P.poster);
+const needMakeup = () => !!(FACE.lm && (BEAUTY.lip || BEAUTY.blush || BEAUTY.shadow || BEAUTY.liner || BEAUTY.brow));
+const needUi = () => !!(TRK.arm || TRK.on || (SEG.mode && SEG.state === "loading"));
 const MONO = `"IBM Plex Mono", ui-monospace, monospace`, ANTON = `Anton, Impact, sans-serif`;
 function decorate(x, w, h, P){
   x.clearRect(0, 0, w, h);
@@ -824,12 +840,11 @@ function setStill(full, opts = {}){
   still = {full, prev, mirror: !!opts.mirror, date: opts.date || new Date(), sample: !!opts.sample};
   upload(prev, prev.width, prev.height);
   $("#tag").hidden = !opts.sample;
-  thumbsDue = 0; updateUI();
+  renderThumbs(); updateUI();
 }
 function goLive(){ if (!stream) return startCamera(); still = null; $("#tag").hidden = true; P.poster = null; $("#aiClear").hidden = true; updateUI(); }
 
-const LITE = (()=>{ try { return matchMedia("(pointer:coarse)").matches || Math.min(screen.width, screen.height) < 700 || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); } catch(e){ return false; } })();
-function getCam(c){ return navigator.mediaDevices.getUserMedia({video:Object.assign(LITE ? {width:{ideal:1280}, height:{ideal:720}, frameRate:{ideal:30, max:30}} : {width:{ideal:1920}, height:{ideal:1080}}, c), audio:false}); }
+function getCam(c){ return navigator.mediaDevices.getUserMedia({video:Object.assign({width:{ideal:1920}, height:{ideal:1080}}, c), audio:false}); }
 async function attachStream(){
   video.srcObject = stream; await video.play(); live = true; still = null;
   const tr = stream.getVideoTracks()[0], st = tr.getSettings?.() || {}, lab = (tr.label || "").toLowerCase();
@@ -837,7 +852,7 @@ async function attachStream(){
   facing = back ? "environment" : "user"; mirror = !back; camUI();
   $("#notice").hidden = true; $("#tag").hidden = true;
 }
-function camUI(){ $("#camFront").setAttribute("aria-pressed", facing === "user"); $("#camBack").setAttribute("aria-pressed", facing === "environment"); $("#camSeg").hidden = !navigator.mediaDevices?.getUserMedia; }
+function camUI(){ $("#camFront").setAttribute("aria-pressed", facing === "user"); $("#camBack").setAttribute("aria-pressed", facing === "environment"); $("#camSeg").hidden = true; $("#camFlip").hidden = !navigator.mediaDevices?.getUserMedia; $("#camFlipL").textContent = facing === "user" ? "Ön" : "Arka"; $("#camFlip").setAttribute("aria-label", facing === "user" ? "Ön kamera · arkaya geç" : "Arka kamera · öne geç"); }
 async function startCamera(){
   try {
     if (!navigator.mediaDevices?.getUserMedia) throw 0;
@@ -873,9 +888,10 @@ async function switchCam(want){
     toast(want === "environment" ? "Bu cihazda arka kamera bulunamadı" : "Bu cihazda ön kamera bulunamadı");
     try { stream = await getCam(curId ? {deviceId:{exact:curId}} : {facingMode:{ideal:facing}}); await attachStream(); } catch(e2){}
   }
-  busy = false; thumbsDue = 0; updateUI();
+  busy = false; renderThumbs(); updateUI();
 }
 $("#camFront").onclick = () => switchCam("user");
+$("#camFlip").onclick = () => switchCam(facing === "user" ? "environment" : "user");
 $("#camBack").onclick = () => switchCam("environment");
 
 /* ================= ARAYÜZ ================= */
@@ -892,19 +908,32 @@ function updateUI(){
 }
 function updateEdge(){ const w = FACEFX.warp ? " · " + WARPS[FACEFX.warp][1].toLocaleUpperCase("tr") : ""; $("#edge").innerHTML = `<b>${esc((label || PRESETS[pi].name).toLocaleUpperCase("tr"))}${edited ? " *" : ""}</b>${esc(w)}`; }
 
+const PERF = {q:1, acc:0, n:0, t0:0, good:0, last:0, lowSince:0};
+function perfTick(now){
+  if (!PERF.last){ PERF.last = now; PERF.t0 = now; return; }
+  const dt = now - PERF.last; PERF.last = now;
+  if (dt > 3000 || document.hidden){ PERF.acc = 0; PERF.n = 0; PERF.t0 = now; return; }
+  PERF.acc += dt; PERF.n++;
+  if (now - PERF.t0 < 1500 || PERF.n < 4) return;
+  const avg = PERF.acc / PERF.n; PERF.acc = 0; PERF.n = 0; PERF.t0 = now;
+  if (recState.on || TL.on || LONG.on || PROC.on) return;
+  if (avg > 30 && PERF.q > .5){ PERF.q = Math.max(.5, PERF.q * .8); PERF.good = 0; layout(); G.onResize?.(); }
+  else if (avg < 19 && PERF.q < 1){ if (++PERF.good >= 3){ PERF.q = Math.min(1, PERF.q * 1.15); PERF.good = 0; layout(); G.onResize?.(); } }
+  else PERF.good = 0;
+}
 function layout(){
   const st = $("#stage").getBoundingClientRect(), ar = AR[ari][1];
   const aw = st.width - 32, ah = st.height - 8;
   let w = aw, h = w/ar; if (h > ah){ h = ah; w = h*ar; }
   vp.style.width = Math.floor(w)+"px"; vp.style.height = Math.floor(h)+"px";
-  const dpr = Math.min(window.devicePixelRatio||1, LITE ? 1.5 : 2), cap = LITE ? 960 : 1400;
+  const dpr = Math.min(window.devicePixelRatio||1, 2) * PERF.q, cap = Math.round(1280 * Math.max(.6, PERF.q));
   let pw = Math.round(w*dpr), ph = Math.round(h*dpr); const k = Math.min(1, cap/Math.max(pw,ph)); pw = Math.max(120, Math.round(pw*k)); ph = Math.max(120, Math.round(ph*k));
   for (const c of [glc, makeupC, deco, maskC, gameC, uiC]) if (c.width !== pw || c.height !== ph){ c.width = pw; c.height = ph; }
   $("#arBtn").textContent = AR[ari][0];
 }
 addEventListener("resize", layout);
 try { new ResizeObserver(() => layout()).observe($("#stage")); } catch(e){}
-$("#arBtn").onclick = () => { if (recState.on) return; ari = (ari+1) % AR.length; layout(); thumbsDue = 0; if (G.id) G.onResize?.(); };
+$("#arBtn").onclick = () => { if (recState.on) return; ari = (ari+1) % AR.length; layout(); renderThumbs(); if (G.id) G.onResize?.(); };
 $("#flipBtn").onclick = () => switchCam(facing === "user" ? "environment" : "user");
 $("#timerBtn").onclick = () => { timer = timer === 0 ? 3 : timer === 3 ? 10 : 0; $("#timerLabel").textContent = timer ? timer+"s" : ""; toast(timer ? `Zamanlayıcı ${timer} saniye` : "Zamanlayıcı kapalı"); $("#timerBtn").classList.toggle("on", !!timer); };
 
@@ -913,8 +942,9 @@ const strip = $("#strip"), thumbs = [];
 CATS.forEach(([k,lab]) => { const b = document.createElement("button"); b.className = "cat"; b.dataset.k = k; b.setAttribute("aria-pressed", k === catSel);
   b.innerHTML = `${lab}<i></i>`;
   b.onclick = () => { catSel = k; document.querySelectorAll(".cat").forEach(x => x.setAttribute("aria-pressed", x === b));
-    PRESETS.forEach((p,i) => document.getElementById("pr-"+i).hidden = !!p.gone || !(k === "all" || p.cat === k || i === 0)); strip.scrollLeft = 0; thumbsDue = 0; tick(520,.03); };
+    PRESETS.forEach((p,i) => document.getElementById("pr-"+i).hidden = !!p.gone || !(k === "all" || p.cat === k || i === 0)); strip.scrollLeft = 0; renderThumbs(); tick(520,.03); };
   $("#cats").appendChild(b); });
+strip.addEventListener("scroll", () => thumbsSoon(), {passive:true});
 function makeFrame(p, i){
   const b = document.createElement("button"); b.className = "frame"; b.setAttribute("aria-pressed", i===pi); b.id = "pr-"+i; b.title = p.d || "";
   b.innerHTML = `<span class="num">▸ ${String(i+1).padStart(2,"0")}A</span>`;
@@ -963,7 +993,7 @@ document.querySelectorAll(".tab").forEach(t => t.onclick = () => {
   const open = !sheet.hidden && curPanel === t.dataset.tab;
   sheet.hidden = open; curPanel = t.dataset.tab;
   document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== t.dataset.tab);
-  if (t.dataset.tab === "presets") thumbsDue = 0;
+  if (t.dataset.tab === "presets") renderThumbs();
 });
 
 /* ================= SES ================= */
@@ -1027,8 +1057,11 @@ function renderFrom(src, mir){
 }
 function renderFull(){ return renderFrom(still.full, still.mirror); }
 function composite(w, h, into){
-  const out = into || canvasOf(w, h);
-  const ox = out.getContext("2d"); ox.drawImage(glc, 0, 0, w, h); ox.globalCompositeOperation = "multiply"; ox.drawImage(makeupC, 0, 0, w, h); ox.globalCompositeOperation = "source-over"; ox.drawImage(deco, 0, 0, w, h); ox.drawImage(maskC, 0, 0, w, h); ox.drawImage(gameC, 0, 0, w, h); return out;
+  glFresh(); const out = into || canvasOf(w, h);
+  const ox = out.getContext("2d"); ox.drawImage(glc, 0, 0, w, h);
+  if (makeupC._on !== false){ ox.globalCompositeOperation = "multiply"; ox.drawImage(makeupC, 0, 0, w, h); ox.globalCompositeOperation = "source-over"; }
+  for (const c of [deco, maskC, gameC]) if (c._on !== false) ox.drawImage(c, 0, 0, w, h);
+  return out;
 }
 function captureLook(){
   if (previewOnly()) return {out: composite(glc.width, glc.height), raw: null};
@@ -1157,7 +1190,7 @@ async function doPolaroid(src){
   const cap = polCaption(), card = makePolaroid(src, cap);
   const o = $("#polOut"), m = Math.min(src.width, src.height), sq = canvasOf(900, 900);
   sq.getContext("2d").drawImage(src, (src.width - m)/2, (src.height - m)/2, m, m, 0, 0, 900, 900);
-  o.innerHTML = `<div class="card"><img alt="Polaroid"><p></p><small>Kapatmak için dokun</small></div>`;
+  o.innerHTML = `<div class="card"><img alt="Polaroid"><p></p></div><small>Kapatmak için dokun</small>`;
   o.querySelector("img").src = sq.toDataURL("image/jpeg", .9); o.querySelector("p").textContent = cap; o.hidden = false;
   tick(180,.6,"sawtooth",.02); tick(90,.5,"square",.015,.1);
   await addCanvas(card, "polaroid");
@@ -1204,49 +1237,23 @@ async function doDouble(){
 }
 
 /* ---------- Uzun pozlama ---------- */
-const LIGHTS = {
-  cok:   {l:"🌑 Çok karanlık",  dur:8000, gain:2.6},
-  biraz: {l:"🌘 Biraz karanlık", dur:4000, gain:1.6},
-  aydin: {l:"☀️ Aydınlık",       dur:2000, gain:1}
-};
-const LONG = {on:false, acc:null, end:0, dur:4000, light:"oto", durManual:false, cur:"aydin", gain:1};
-function sceneLuma(){
-  try {
-    const t = canvasOf(16, 16), x = t.getContext("2d", {willReadFrequently:true}); x.drawImage(glc, 0, 0, 16, 16);
-    const d = x.getImageData(0, 0, 16, 16).data; let sum = 0;
-    for (let i = 0; i < d.length; i += 4) sum += .2126*d[i] + .7152*d[i+1] + .0722*d[i+2];
-    return sum / (d.length/4);
-  } catch(e){ return 128; }
-}
-function pickLight(){
-  if (LONG.light !== "oto") return LONG.light;
-  const y = sceneLuma(); return y < 45 ? "cok" : y < 100 ? "biraz" : "aydin";
-}
-function drawGain(x, src, w, h, g){
-  x.globalCompositeOperation = "source-over"; x.globalAlpha = 1; x.drawImage(src, 0, 0, w, h);
-  let rem = g - 1; x.globalCompositeOperation = "lighter";
-  while (rem > .02){ x.globalAlpha = Math.min(1, rem); x.drawImage(src, 0, 0, w, h); rem -= 1; }
-  x.globalCompositeOperation = "source-over"; x.globalAlpha = 1;
-}
+const LONG = {on:false, acc:null, end:0, dur:4000};
 function startLong(){
   if (!live || still) return needLive();
   if (LONG.on) return finishLong();
-  LONG.cur = pickLight(); const L = LIGHTS[LONG.cur]; LONG.gain = L.gain;
-  if (!LONG.durManual) LONG.dur = L.dur;
-  if (LONG.light === "oto") toast("Otomatik: " + L.l.replace(/^\S+\s/, "").toLowerCase() + " · " + (LONG.dur/1000) + " sn");
   LONG.acc = canvasOf(glc.width, glc.height); LONG.on = true; LONG.end = performance.now() + LONG.dur;
-  LONG.acc.getContext("2d").drawImage(glc, 0, 0); tick(660,.1,"sine",.06); $("#shutter").classList.add("recording");
+  glFresh(); LONG.acc.getContext("2d").drawImage(glc, 0, 0); tick(660,.1,"sine",.06); $("#shutter").classList.add("recording");
 }
 function longFrame(now){
   if (!LONG.on) return;
   const x = LONG.acc.getContext("2d"); x.globalCompositeOperation = "lighten"; x.drawImage(glc, 0, 0, LONG.acc.width, LONG.acc.height); x.globalCompositeOperation = "source-over";
-  const dx = deco.getContext("2d"); drawGain(dx, LONG.acc, deco.width, deco.height, LONG.gain);
+  const dx = deco.getContext("2d"); dx.drawImage(LONG.acc, 0, 0, deco.width, deco.height);
   const left = Math.max(0, LONG.end - now); $("#recTag").hidden = false; $("#recTag").textContent = `● UZUN POZ ${(left/1000).toFixed(1)}`;
   if (left <= 0) finishLong();
 }
 async function finishLong(){
   if (!LONG.on) return; LONG.on = false; $("#shutter").classList.remove("recording"); $("#recTag").hidden = true;
-  const c = canvasOf(LONG.acc.width, LONG.acc.height), x = c.getContext("2d"); drawGain(x, LONG.acc, c.width, c.height, LONG.gain);
+  const c = canvasOf(LONG.acc.width, LONG.acc.height), x = c.getContext("2d"); x.drawImage(LONG.acc, 0, 0);
   const d2 = canvasOf(c.width, c.height); decorate(d2.getContext("2d"), c.width, c.height, P); x.drawImage(d2, 0, 0);
   shutterSound(); await addCanvas(c, "uzun"); toast("Uzun pozlama hazır");
 }
@@ -1372,8 +1379,8 @@ function setMode(k, quiet){
   if (mode === "cift"){ DBL.a = null; }
   if (mode === "stop" && STOP.frames.length) toast("Stop motion kareleri silindi");
   STOP.frames = []; $("#onion").hidden = true; $("#onion").style.mixBlendMode = "";
-  mode = k;
-  if (k === "polaroid"){ arBeforePol = ari; ari = 1; layout(); thumbsDue = 0; }
+  mode = k; modeReset();
+  if (k === "polaroid"){ arBeforePol = ari; ari = 1; layout(); renderThumbs(); }
   if (LIVE_ONLY.has(k) && still) goLive();
   document.querySelectorAll(".mode").forEach(b => b.setAttribute("aria-pressed", b.id === "m-"+k));
   renderModebar(); updateUI(); centerMode(k, true); requestAnimationFrame(() => requestAnimationFrame(() => centerMode(mode, true)));
@@ -1386,11 +1393,7 @@ function renderModebar(){
   if (mode === "kabin") BOOTH.forEach((b, i) => mb.appendChild(chip(b[0], () => { boothStyle = i; renderModebar(); }, i === boothStyle)));
   if (mode === "cift"){ BLENDS.forEach(([k, l]) => mb.appendChild(chip(l, () => { DBL.blend = k; $("#onion").style.mixBlendMode = k; renderModebar(); }, DBL.blend === k)));
     if (DBL.a) mb.appendChild(chip("Baştan", () => { DBL.a = null; $("#onion").hidden = true; renderModebar(); }, null, "warn")); }
-  if (mode === "uzun"){
-    mb.appendChild(chip("✨ Otomatik", () => { LONG.light = "oto"; LONG.durManual = false; renderModebar(); }, LONG.light === "oto"));
-    Object.entries(LIGHTS).forEach(([k, L]) => mb.appendChild(chip(L.l, () => { LONG.light = k; LONG.durManual = false; LONG.dur = L.dur; LONG.gain = L.gain; renderModebar(); }, LONG.light === k)));
-    [[2000,"2 sn"],[4000,"4 sn"],[8000,"8 sn"]].forEach(([d, l]) => mb.appendChild(chip(l, () => { LONG.dur = d; LONG.durManual = true; renderModebar(); }, LONG.dur === d)));
-  }
+  if (mode === "uzun") [[2000,"2 sn"],[4000,"4 sn"],[8000,"8 sn"]].forEach(([d, l]) => mb.appendChild(chip(l, () => { LONG.dur = d; renderModebar(); }, LONG.dur === d)));
   if (mode === "stop"){
     mb.appendChild(chip(`<b>${STOP.frames.length}</b> kare`, () => {}, null));
     mb.appendChild(chip(`${STOP.fps} fps`, () => { STOP.fps = STOP.fps === 8 ? 12 : STOP.fps === 12 ? 4 : 8; renderModebar(); }));
@@ -1595,9 +1598,9 @@ const FACEFX = {warp:0, k:1, mask:null};
 const WARPS = [[0,"Yok","🚫"],[1,"Koca göz","👀"],[2,"Balon kafa","🎈"],[3,"Mini yüz","🤏"],[4,"Girdap","🌀"],[5,"Uzun surat","🫠"],[6,"Geniş surat","😶"],[7,"Uzaylı","👽"],[8,"Kurbağa","🐸"],[9,"Ayna yüz","🪞"],[10,"Jöle","🍮"],[11,"Bebek","👶"]];
 const MASKS = [[null,"Yok","🚫"],["gozluk","Gözlük","🕶️"],["kalp","Kalp gözlük","💖"],["3b","3B gözlük","🎞️"],["tac","Taç","👑"],["kopek","Köpek","🐶"],["kedi","Kedi","🐱"],["palyaco","Palyaço","🤡"],["biyik","Bıyık","🥸"],["anime","Anime","✨"],["cicek","Çiçek taç","🌸"],["kask","Astronot","🧑‍🚀"]];
 WARPS.forEach(([k, n, e]) => { const b = document.createElement("button"); b.className = "tile"; b.dataset.w = k; b.innerHTML = `<span>${e}</span>${n}`; b.setAttribute("aria-pressed", k === 0);
-  b.onclick = () => { FACEFX.warp = k; document.querySelectorAll("#warps .tile").forEach(x => x.setAttribute("aria-pressed", x === b)); if (k && live) loadFace(); tick(700,.04,"triangle",.04); updateEdge(); syncLens("face"); }; $("#warps").appendChild(b); });
+  b.onclick = () => { if (k){ fxOff("face"); FACEFX.mask = null; document.querySelectorAll("#masks .tile").forEach((x, i) => x.setAttribute("aria-pressed", i === 0)); } FACEFX.warp = k; document.querySelectorAll("#warps .tile").forEach(x => x.setAttribute("aria-pressed", x === b)); if (k && live) loadFace(); tick(700,.04,"triangle",.04); updateEdge(); syncLens("face"); }; $("#warps").appendChild(b); });
 MASKS.forEach(([k, n, e]) => { const b = document.createElement("button"); b.className = "tile"; b.innerHTML = `<span>${e}</span>${n}`; b.setAttribute("aria-pressed", k === null);
-  b.onclick = () => { FACEFX.mask = k; document.querySelectorAll("#masks .tile").forEach(x => x.setAttribute("aria-pressed", x === b)); if (k && live) loadFace(); tick(700,.04,"triangle",.04); syncLens("face"); }; $("#masks").appendChild(b); });
+  b.onclick = () => { if (k){ fxOff("face"); FACEFX.warp = 0; document.querySelectorAll("#warps .tile").forEach(x => x.setAttribute("aria-pressed", +x.dataset.w === 0)); } FACEFX.mask = k; document.querySelectorAll("#masks .tile").forEach(x => x.setAttribute("aria-pressed", x === b)); if (k && live) loadFace(); tick(700,.04,"triangle",.04); syncLens("face"); }; $("#masks").appendChild(b); });
 function faceGeo(){
   const f = FACE.lm;
   if (!f) return {fc:[.5,.52], fr:.24, el:[.42,.58], er:[.58,.58], mo:[.5,.4], fh:[.5,.72]};
@@ -1675,6 +1678,7 @@ async function loadFace(){
 }
 function trackFace(now){
   if (FACE.state !== "ready" || !live || still || video.readyState < 2) return;
+  if (now - (FACE.at || 0) < (PERF.q < .8 ? 66 : 40)) return; FACE.at = now;
   const ts = Math.max(FACE.last + 1, Math.round(now)); FACE.last = ts;
   let r; try { r = FACE.model.detectForVideo(video, ts); } catch(e){ return; }
   const lm = r?.faceLandmarks?.[0];
@@ -1890,7 +1894,7 @@ const gamesEl = $("#games");
 function clearFx(){ FX_STATE.split = 0; FX_STATE.ghostBoost = 0; musicStop(); }
 function stopGame(){ G.id = null; setTimeout(() => syncLens("games"), 0); clearFx(); gameC.getContext("2d").clearRect(0,0,gameC.width,gameC.height); document.querySelectorAll(".game").forEach(b => b.setAttribute("aria-pressed","false")); }
 function startGame(id, fromLens){
-  const g = GAMES.find(x => x.id === id); clearFx();
+  fxOff("game"); const g = GAMES.find(x => x.id === id); clearFx();
   if (!fromLens) setTimeout(() => syncLens("games"), 0);
   document.querySelectorAll(".game").forEach(b => b.setAttribute("aria-pressed", b.id === "g-"+id));
   for (const k in G) delete G[k];
@@ -2356,7 +2360,7 @@ const LOOKS = [
 const colorOf = (list, name) => (list.find(x => x[0] === name) || [])[1] || null;
 function beautyFace(){ return BEAUTY.slim > 0 || BEAUTY.eye > 0 || BEAUTY.nose > 0 || BEAUTY.lip || BEAUTY.blush || BEAUTY.shadow || BEAUTY.liner || BEAUTY.brow; }
 function applyLook(id){
-  const L = LOOKS.find(l => l[0] === id); if (!L) return;
+  const L = LOOKS.find(l => l[0] === id); if (!L) return; if (id !== "yok") fxOff("beauty");
   Object.assign(BEAUTY, {look:id, smooth:0, slim:0, eye:0, nose:0, lip:null, blush:null, shadow:null, liner:false, brow:false}, L[3]);
   if (beautyFace() && live) loadFace();
   beautyUI(); if (typeof syncLens === "function") syncLens("beauty");
@@ -2368,12 +2372,12 @@ function beautyUI(){
     const sl = $("#beautySl");
     BSL.forEach(([k, lab]) => { const row = document.createElement("div"); row.className = "row";
       row.innerHTML = `<label for="b-${k}">${lab}</label><output id="bo-${k}"></output><input type="range" id="b-${k}" min="0" max="1" step="0.01">`; sl.appendChild(row);
-      row.querySelector("input").addEventListener("input", e => { BEAUTY[k] = +e.target.value; BEAUTY.look = "custom"; if (beautyFace() && live) loadFace(); beautyUI(); }); });
+      row.querySelector("input").addEventListener("input", e => { if (+e.target.value > 0 && !beautyOn()) fxOff("beauty"); BEAUTY[k] = +e.target.value; BEAUTY.look = "custom"; if (beautyFace() && live) loadFace(); beautyUI(); }); });
     const chips = (el, list, key) => list.forEach(([n, c]) => { const b = document.createElement("button"); b.className = "chip"; b.dataset.v = n; b.innerHTML = c ? `<i class="sw" style="background:${c}"></i>${n}` : n;
-      b.onclick = () => { BEAUTY[key] = c ? n : null; BEAUTY.look = "custom"; if (c && live) loadFace(); beautyUI(); }; el.appendChild(b); });
+      b.onclick = () => { if (c) fxOff("beauty"); BEAUTY[key] = c ? n : null; BEAUTY.look = "custom"; if (c && live) loadFace(); beautyUI(); }; el.appendChild(b); });
     chips($("#lipRow"), LIPS, "lip"); chips($("#blushRow"), BLUSHES, "blush"); chips($("#shadowRow"), SHADOWS, "shadow");
     [["liner","Eyeliner"],["brow","Kaş belirginleştir"]].forEach(([k, n]) => { const b = document.createElement("button"); b.className = "chip"; b.dataset.k = k; b.textContent = n;
-      b.onclick = () => { BEAUTY[k] = !BEAUTY[k]; BEAUTY.look = "custom"; if (BEAUTY[k] && live) loadFace(); beautyUI(); }; $("#mkToggles").appendChild(b); });
+      b.onclick = () => { if (!BEAUTY[k]) fxOff("beauty"); BEAUTY[k] = !BEAUTY[k]; BEAUTY.look = "custom"; if (BEAUTY[k] && live) loadFace(); beautyUI(); }; $("#mkToggles").appendChild(b); });
   }
   document.querySelectorAll("#looks .tile").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === BEAUTY.look));
   BSL.forEach(([k]) => { $("#b-"+k).value = BEAUTY[k]; $("#bo-"+k).textContent = Math.round(BEAUTY[k]*100); });
@@ -2595,6 +2599,7 @@ function freezeBackground(){
   SEG.frozen = true; return true;
 }
 function setSegMode(i){
+  if (SEGM[i] && SEGM[i][0]) fxOff("seg");
   const m = SEGM[i]; SEG.sel = i; SEG.mode = m[0]; if (m[3]) SEG.color = m[3];
   if (SEG.mode === 5){ SEG.frozen = false; if (live && !still){ freezeBackground(); toast("Arka plan donduruldu · şimdi sadece nesne hareket eder"); } }
   if (SEG.mode){ SEG.has = false; loadSeg(SEG.target === "object" ? "object" : "person"); if (SEG.target === "object" && !SEG.point && !TRK.on){ TRK.arm = true; toast("Ayırmak istediğin nesneye dokun"); } }
@@ -2665,11 +2670,11 @@ function buildLens(){
     b.onclick = () => pickLens(idx, true);
     lensRow.appendChild(b);
   });
-  lensIdx = currentLensIdx(); centerLens(lensIdx, false); markLens(); thumbsDue = 0;
+  lensIdx = currentLensIdx(); centerLens(lensIdx, false); markLens(); renderThumbs();
 }
 function centerLens(idx, smooth){
   const el = lensRow.children[Math.max(0, idx)]; if (!el) return;
-  lensRow.scrollTo({left: el.offsetLeft + el.offsetWidth/2 - lensRow.clientWidth/2, behavior: smooth ? "smooth" : "auto"});
+  lensRow.scrollTo({left: el.offsetLeft + el.offsetWidth/2 - lensRow.clientWidth/2, behavior: smooth && !matchMedia("(prefers-reduced-motion: reduce)").matches ? "smooth" : "auto"});
 }
 function nearestLens(){
   const mid = lensRow.scrollLeft + lensRow.clientWidth/2; let best = 0, bd = 1e9;
@@ -2682,7 +2687,7 @@ function markLens(){
   const it = lensItems[n]; if (it) $("#lensName").textContent = it.name;
 }
 lensRow.addEventListener("scroll", () => {
-  markLens(); clearTimeout(lensSettle);
+  thumbsSoon(); markLens(); clearTimeout(lensSettle);
   lensSettle = setTimeout(() => { const n = nearestLens(); if (lensLock != null){ if (n === lensLock || performance.now() > lensLockT) lensLock = null; return; } if (n !== lensIdx) pickLens(n, false); }, 140);
 }, {passive:true});
 function pickLens(idx, scroll){
@@ -2693,6 +2698,7 @@ function pickLens(idx, scroll){
   else if (lensSet === "focus"){ setSegMode(+it.id.slice(1)); splash(it.name, idx ? (SEG.target === "object" ? "dokunduğun nesne ayrılır" : "kişi otomatik ayrılır") : ""); }
   else if (lensSet === "beauty"){ applyLook(it.id); splash(it.name, it.id === "yok" ? "" : "güzellik görünümü"); }
   else if (lensSet === "face"){
+    if (it.id !== "none") fxOff("face");
     if (it.id === "none"){ FACEFX.warp = 0; FACEFX.mask = null; }
     else if (it.id[0] === "w"){ FACEFX.warp = +it.id.slice(1); FACEFX.mask = null; }
     else { FACEFX.mask = it.id.slice(1); FACEFX.warp = 0; }
@@ -2794,67 +2800,29 @@ function slitFrame(x, w, h){
 }
 
 /* ================= DÖNGÜ ================= */
-/* Telefon: efekt önizlemeleri kameradan çizilmez; efektin renk ayarlarından üretilen hafif bir renk kartı gösterilir (WebGL yok). */
-const SWC = new WeakMap();
-const ICONS = {"Orijinal":"⭕","Temiz Cilt":"✨","Dijital Kamera":"📷","Tek Kullanımlık":"📸","Y2K Parıltı":"💿","Soft Pembe":"🌸","Kırmızı Kalsın":"🔴","8-Bit":"👾","Gece Görüşü":"🦉","Neon Gece":"🌃","Pop Art":"💥","Vaporwave":"🌴","Kızılötesi":"🔥",
-"Porselen":"🤍","Bal":"🍯","Gül Kurusu":"🥀","Şeftali":"🍑","Işıltı":"💫","Kore Soft":"🧸",
-"Çöl Gezegeni":"🏜️","Paris Masalı":"🗼","Neon Şehir":"🏙️","Pastel Otel":"🏨","Gece Taksisi":"🚕","Aile Babası":"🏠","Distopya":"🏭","Yaz Aşkı":"🏖️",
-"Çizgi Roman":"💭","Karakalem":"✏️","Neon Kontur":"🔷","Gazete":"📰","Pop Noktası":"🔵","Suluboya":"🎨","Animasyon":"🖍️",
-"Gişe":"🎟️","Tungsten":"💡","Mat Sinema":"🎥","Kuzey":"❄️","Western":"🤠","Kod Yeşili":"💻","Yeşilçam":"📽️","Noir":"🕵️","Bleach":"🧼","Hong Kong '94":"🏮","Gerilim":"😱","Simetri":"🪞","Mars":"🪐","Derin Okyanus":"🌊","Technicolor":"🌈","Projektör":"🔦","Film Yanığı":"🔥","Ay Işığı":"🌕",
-"Kodak Altın":"🟡","Fuji Yeşil":"🟢","Ektachrome":"🔵","Print 2383":"🎞️","Polaroid":"🖼️","Instax":"📷","Lomo":"🌀","Tri-X":"⚫","Altın Saat":"🌇","Kodachrome":"🟥","Velvia":"🌿","Portra 800":"👩","HP5":"⬜","Super 16":"🎞️","Cinestill 50":"🌆",
-"Yaz '74":"🌻","Kaset 80":"📼","VHS":"📺","Super 8":"🎥","Sepya":"🟤","1920":"🎩","Kartpostal 60":"✉️","Dagerotip":"🏛️","Game Boy":"🎮",
-"Rüya":"☁️","Pastel":"🍬","Kahve":"☕","Kış":"⛄","Sis":"🌫️","Grunge":"🎸","Duotone":"🎭","Yağmur":"🌧️","Termal":"🌡️"};
-function swatchOf(P){
-  let c = SWC.get(P); if (c) return c;
-  c = canvasOf(112, 112); const x = c.getContext("2d"), S = 112;
-  const cl = v => Math.max(0, Math.min(1, v)), n = k => +P[k] || 0;
-  const temp = n("temp"), tint = n("tint"), sat = n("sat"), exp = n("exp"), con = n("con");
-  const sc = Array.isArray(P.sc) ? P.sc : [0,0,0], hc = Array.isArray(P.hc) ? P.hc : [0,0,0];
-  const base = .5 + exp*.25, rgb = [base + temp*.22 + tint*.12, base - tint*.2, base - temp*.22 + tint*.12];
-  const stop = (k, add) => {
-    let v = rgb.map((b, i) => cl(b*k + add[i]*2.2 + (k < 1 ? .02 : 0)));
-    const m = (v[0] + v[1] + v[2])/3; v = v.map(q => q + (q - m)*(sat*1.2));
-    if (P.bw){ const g = (v[0] + v[1] + v[2])/3; v = [g, g, g]; }
-    const mid = rgb.map(b => cl(b*.8)); v = v.map((q, i) => cl(mid[i] + (q - mid[i])*(1 + con*.8)));
-    return "rgb(" + v.map(q => Math.round(q*255)).join(",") + ")";
-  };
-  const g = x.createLinearGradient(0, S, S, 0); g.addColorStop(0, stop(.32, sc)); g.addColorStop(1, stop(1.45, hc));
-  x.fillStyle = g; x.fillRect(0, 0, S, S);
-  if (n("fade") > 0){ x.fillStyle = "rgba(205,205,205," + Math.min(.5, n("fade")*.6) + ")"; x.fillRect(0, 0, S, S); }
-  if (n("glow") > 0 || n("flash") > 0){ const r = x.createRadialGradient(S*.3, S*.3, 2, S*.3, S*.3, S*.8); r.addColorStop(0, "rgba(255,255,255," + Math.min(.7, n("glow")*.8 + n("flash")*.5) + ")"); r.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = r; x.fillRect(0, 0, S, S); }
-  if (n("vig") > 0){ const r = x.createRadialGradient(S/2, S/2, S*.25, S/2, S/2, S*.75); r.addColorStop(0, "rgba(0,0,0,0)"); r.addColorStop(1, "rgba(0,0,0," + Math.min(.8, n("vig")*1.6) + ")"); x.fillStyle = r; x.fillRect(0, 0, S, S); }
-  if (n("grain") > .1){ x.fillStyle = "rgba(255,255,255,.18)"; for (let i = 0; i < 90; i++) x.fillRect(Math.random()*S, Math.random()*S, 1.5, 1.5); }
-  const ic = ICONS[String(P.name || "").replace(/^✦\s*/, "")] || (P.cat === "benim" || P.xref ? "⭐" : "🎞️");
-  x.globalAlpha = .9; x.font = "54px system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif"; x.textAlign = "center"; x.textBaseline = "middle";
-  x.shadowColor = "rgba(0,0,0,.35)"; x.shadowBlur = 8; x.fillText(ic, S/2, S/2 + 3); x.shadowBlur = 0; x.globalAlpha = 1;
-  SWC.set(P, c); return c;
-}
-function paintSwatches(){
-  const N = PRESETS.length, open = !$("#sheet").hidden;
-  for (let i = 0; i < N; i++){
-    const lt = lensSet === "filters" ? lensThumbs[i] : null, st = open && thumbs[i] && !document.getElementById("pr-"+i).hidden;
-    if (!lt && !st) continue;
-    const c = swatchOf(PRESETS[i]);
-    if (st) thumbs[i].drawImage(c, 0, 0);
-    if (lt) lt.drawImage(c, 0, 0);
-  }
-}
 let thumbsDue = 0;
-let thumbPos = 0, thumbLeft = 0, thumbPass = 0;
-function renderThumbs(now, budget){
-  const sz = 112, sp = FX_STATE.split, N = PRESETS.length, max = budget || N;
-  let done = 0, scanned = 0;
-  while (scanned < N && done < max){
-    const i = thumbPos; thumbPos = (thumbPos + 1) % N; scanned++;
-    const lt = lensSet === "filters" ? lensThumbs[i] : null, st = !$("#sheet").hidden && !document.getElementById("pr-"+i).hidden;
-    if (!lt && !st) continue;
-    draw(PRESETS[i], sz, sz, 1, now/1000, still ? still.mirror : mirror, false);
-    if (st) thumbs[i].drawImage(glc, 0, glc.height - sz, sz, sz, 0, 0, sz, sz);
-    if (lt) lt.drawImage(glc, 0, glc.height - sz, sz, sz, 0, 0, sz, sz);
-    done++;
-  }
-  return scanned;
+let thumbQ = [], thumbsAll = false;
+function visibleThumbs(){
+  const out = [], seen = new Set();
+  if (lensSet === "filters"){ const rr = lensRow.getBoundingClientRect();
+    [...lensRow.children].forEach((el, k) => { const it = lensItems[k]; if (!it || it.thumb == null) return; const r = el.getBoundingClientRect(); if (r.right > rr.left - 70 && r.left < rr.right + 70 && !seen.has(it.thumb)){ seen.add(it.thumb); out.push(it.thumb); } }); }
+  if (!$("#sheet").hidden && curPanel === "presets"){ const sr = strip.getBoundingClientRect();
+    PRESETS.forEach((p, i) => { if (seen.has(i)) return; const el = document.getElementById("pr-"+i); if (!el || el.hidden) return; const r = el.getBoundingClientRect(); if (r.right > sr.left - 60 && r.left < sr.right + 60 && r.bottom > 0 && r.top < innerHeight){ seen.add(i); out.push(i); } }); }
+  return out;
 }
+function thumbStep(now, liveNow){
+  if (recState.on || TL.on) return;
+  if (!thumbQ.length){ if (now < thumbsDue) return; thumbQ = visibleThumbs(); thumbsDue = now + (liveNow ? 1600 : 1e9); if (!thumbQ.length) return; }
+  const sz = 112, per = Math.max(1, Math.min(thumbQ.length, Math.floor(glc.width/sz), liveNow ? (PERF.q < .8 ? 2 : 3) : 8)), batch = thumbQ.splice(0, per), mir = still ? still.mirror : mirror;
+  batch.forEach((pi2, k) => draw(PRESETS[pi2], sz, sz, 1, now/1000, mir, false, k*sz));
+  batch.forEach((pi2, k) => { const sx = k*sz, sy = glc.height - sz;
+    const lt = lensSet === "filters" ? lensThumbs[pi2] : null; if (lt) lt.drawImage(glc, sx, sy, sz, sz, 0, 0, sz, sz);
+    if (thumbs[pi2] && !$("#sheet").hidden) thumbs[pi2].drawImage(glc, sx, sy, sz, sz, 0, 0, sz, sz); });
+}
+function renderThumbs(){ thumbQ = []; thumbsDue = 0; }
+function thumbsSoon(){ thumbQ = []; thumbsDue = Math.min(thumbsDue, performance.now() + 120); }
+let glDrawn = 0, fxChipT = 0;
+function glFresh(){ if (performance.now() - glDrawn > 1) { draw(P, glc.width, glc.height, AR[ari][1], performance.now()/1000, still ? still.mirror : mirror, null); } }
 function loop(now){
   if (PROC.on){ requestAnimationFrame(loop); return; }
   requestAnimationFrame(loop);
@@ -2864,15 +2832,16 @@ function loop(now){
     if (G.id && G.g && (G.g.need === "live" || MOTION_GAMES.has(G.id))) sampleMotion();
     if ((G.id && G.g && (G.g.need === "face" || G.g.roul || G.id === "bumu" || G.id === "kafatopu")) || FACEFX.warp || FACEFX.mask || beautyFace()) trackFace(now);
   }
-  if (LITE && now > thumbsDue){ try { paintSwatches(); } catch(e){ console.error(e); } thumbsDue = 1e9; }
   if (!useLive && !still) return;
-  if (!LITE && now > thumbsDue){ renderThumbs(now); thumbsDue = now + (useLive ? 1200 : 1e9); }
-  draw(P, glc.width, glc.height, AR[ari][1], now/1000, still ? still.mirror : mirror, true);
-  decorate(deco.getContext("2d"), deco.width, deco.height, P);
+  perfTick(now);
+  thumbStep(now, useLive);
+  draw(P, glc.width, glc.height, AR[ari][1], now/1000, still ? still.mirror : mirror, true); glDrawn = now;
+  if (needDeco(P)) decorate(layerOn(deco), deco.width, deco.height, P); else layerOff(deco);
   longFrame(now); tlFrame(now);
-  try { if (TRK.on) tkStep(); panUpdate(); segFrame(now); drawUi(); } catch(e){ console.error(e); }
-  try { drawMask(now); drawMakeup(); } catch(e){ console.error(e); }
-  try { gameFrame(now); } catch(e){ console.error(e); }
+  try { if (TRK.on) tkStep(); panUpdate(); segFrame(now); if (needUi()){ layerOn(uiC); drawUi(); } else layerOff(uiC); } catch(e){ console.error(e); }
+  try { if (FACEFX.mask){ layerOn(maskC); drawMask(now); } else layerOff(maskC); if (needMakeup()){ layerOn(makeupC); drawMakeup(); } else layerOff(makeupC); } catch(e){ console.error(e); }
+  try { if (G.id){ layerOn(gameC); gameFrame(now); } else layerOff(gameC); } catch(e){ console.error(e); }
+  if (now - fxChipT > 250){ fxChipT = now; fxChip(); }
   if (recState.on){
     composite(recState.canvas.width, recState.canvas.height, recState.canvas);
     const el = now - recState.t0, s = Math.floor(el/1000);
@@ -2937,7 +2906,7 @@ async function aiPoster(){
     const img = await snapshotBlob();
     const r = await sample.json(`Ekteki fotoğraf bir filmin afişi olsaydı: eğlenceli, sinematik, Türkçe bir film adı, kısa bir slogan ve tür uydur. Kişileri tanımlamaya ya da kim olduklarını tahmin etmeye çalışma; sahnenin havasına odaklan.
 Sadece JSON: {"title":"en fazla 4 kelime","tagline":"en fazla 8 kelime","genre":"tek kelime tür"}`, {images:[img], modelTier:"quick", cache:false});
-    P.poster = {title:String(r?.title||"").slice(0,40), tagline:String(r?.tagline||"").slice(0,70), genre:String(r?.genre||"").slice(0,20)};
+    fxOff("poster"); P.poster = {title:String(r?.title||"").slice(0,40), tagline:String(r?.tagline||"").slice(0,70), genre:String(r?.genre||"").slice(0,20)};
     $("#aiClear").hidden = false;
     aiBusy(false, `<b>${esc(P.poster.title)}</b> · ${esc(P.poster.tagline)}`);
   } catch(e){ aiBusy(false); aiErr(e); }
@@ -2946,6 +2915,47 @@ function esc(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"
 $("#aiForm").addEventListener("submit", e => { e.preventDefault(); aiStyle(); });
 $("#aiPick").onclick = aiPick; $("#aiPoster").onclick = aiPoster;
 $("#aiClear").onclick = () => { P.poster = null; $("#aiClear").hidden = true; };
+
+/* ================= TEK EFEKT ================= */
+const beautyOn = () => !!(BEAUTY.smooth > 0 || beautyFace());
+function fxActive(){
+  if (G.id){ const g = GAMES.find(x => x.id === G.id); return {kind:"game", name:g ? g.name : "Oyun", emo:g ? g.ico : "🎮"}; }
+  if (FACEFX.warp && WARPS[FACEFX.warp]) return {kind:"face", name:WARPS[FACEFX.warp][1], emo:WARPS[FACEFX.warp][2]};
+  if (FACEFX.mask){ const m = MASKS.find(x => x[0] === FACEFX.mask); return {kind:"face", name:m ? m[1] : "Maske", emo:m ? m[2] : "🎭"}; }
+  if (SEG.mode){ const m = SEGM[SEG.sel] || SEGM[0]; return {kind:"seg", name:m[1], emo:m[2]}; }
+  if (beautyOn()){ const L = LOOKS.find(l => l[0] === BEAUTY.look); return {kind:"beauty", name:L && L[0] !== "yok" ? L[1] + " makyaj" : "Güzellik", emo:L && L[0] !== "yok" ? L[2] : "✨"}; }
+  if (P.poster) return {kind:"poster", name:"Film afişi", emo:"🎬"};
+  return null;
+}
+function fxOff(keep, quiet){
+  const was = fxActive(), sets = [];
+  if (keep !== "game" && G.id){ stopGame(); }
+  if (keep !== "face" && (FACEFX.warp || FACEFX.mask)){ FACEFX.warp = 0; FACEFX.mask = null; sets.push("face");
+    document.querySelectorAll("#warps .tile").forEach(x => x.setAttribute("aria-pressed", +x.dataset.w === 0));
+    document.querySelectorAll("#masks .tile").forEach((x, i) => x.setAttribute("aria-pressed", i === 0)); }
+  if (keep !== "seg" && SEG.mode){ setSegMode(0); TRK.arm = false; sets.push("focus"); }
+  if (keep !== "beauty" && beautyOn()){ Object.assign(BEAUTY, {look:"yok", smooth:0, slim:0, eye:0, nose:0, lip:null, blush:null, shadow:null, liner:false, brow:false}); beautyUI(); sets.push("beauty"); }
+  if (keep !== "poster" && P.poster){ P.poster = null; $("#aiClear").hidden = true; }
+  updateEdge(); if (typeof syncLens === "function") sets.forEach(k => syncLens(k)); fxChip(); queueMicrotask(fxChip);
+  if (!quiet && was && was.kind !== keep) toast(`${was.emo} ${was.name} kapandı`);
+}
+let fxChipKey = "";
+function fxChip(){
+  const a = fxActive(), el = $("#fxChip"), key = a ? a.kind + a.name : "";
+  if (key === fxChipKey) return; fxChipKey = key;
+  if (!a){ el.hidden = true; return; }
+  el.innerHTML = `<i style="font-style:normal">${a.emo}</i><span></span><b aria-hidden="true">✕</b>`; el.querySelector("span").textContent = a.name;
+  el.setAttribute("aria-label", a.name + " efektini kapat"); el.hidden = false;
+}
+$("#fxChip").onclick = e => { e.stopPropagation(); fxOff(null, true); toast("Efekt kapatıldı"); tick(520,.04,"triangle",.04); };
+$("#fxChip").addEventListener("pointerdown", e => e.stopPropagation());
+function modeReset(){
+  const had = fxActive() || VOICE.sel !== "normal";
+  fxOff(null, true);
+  if (VOICE.sel !== "normal" || VOICE.on){ VOICE.sel = "normal"; if (VOICE.on) micOff(); voiceUI(); if (typeof syncLens === "function") syncLens("voice"); }
+  if (lensSet !== "filters"){ const t = $("#tb-presets"); if (t){ document.querySelectorAll(".tab").forEach(x => x.setAttribute("aria-selected", x === t)); lensSet = "filters"; buildLens(); $("#sheet").hidden = true; } }
+  if (had) toast("Efektler kapatıldı");
+}
 
 /* ================= BAŞLAT ================= */
 try {
@@ -2960,9 +2970,6 @@ restoreMine(); catCounts(); camUI(); focusUI(); syncControls(); layout(); update
 setTimeout(() => { if (live){ const n = $("#notice"); n.hidden = false; n.innerHTML = "<b>Kaydırarak seç:</b> vizörde sağa-sola filtre, yukarı-aşağı mod. Alttaki dairelerde de kaydırabilirsin. İki parmak ya da tekerlekle yakınlaştır."; setTimeout(() => n.hidden = true, 6000); } }, 2500);
 requestAnimationFrame(() => centerMode(mode, false));
 requestAnimationFrame(loop);
-if (LITE) setTimeout(() => { try { toast("Hafif mod açık · telefon"); } catch(e){} }, 1400);
 startCamera();
 })();
 </script>
-
-</body></html>
