@@ -77,6 +77,7 @@ button:disabled{opacity:.4;cursor:default}
 .polout .card{width:min(74%,420px);background:#f3efe6;padding:5% 5% 20%;border-radius:3px;box-shadow:0 30px 60px rgba(0,0,0,.55);transform:rotate(-2.5deg);animation:eject 1.1s cubic-bezier(.2,.8,.2,1) both;position:relative}
 .polout img{display:block;width:100%;aspect-ratio:1;object-fit:cover;animation:polDev 5s ease-out both}
 .polout p{position:absolute;left:0;right:0;bottom:4.5%;margin:0;text-align:center;font-family:var(--f-hand);font-size:clamp(18px,5vw,30px);color:#2b2620}
+.polx{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(14,14,17,.74);color:#fff;font-size:15px;border:1px solid var(--line2)}
 .polout small{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.8);text-shadow:0 1px 4px rgba(0,0,0,.8)}
 @keyframes eject{0%{transform:translateY(70%) rotate(0);opacity:0}100%{transform:translateY(0) rotate(-2.5deg);opacity:1}}
 @keyframes polDev{0%{filter:brightness(.25) sepia(1) hue-rotate(150deg) saturate(.3)}45%{filter:brightness(.8) sepia(.5) saturate(.6)}100%{filter:none}}
@@ -844,7 +845,7 @@ function setStill(full, opts = {}){
 }
 function goLive(){ if (!stream) return startCamera(); still = null; $("#tag").hidden = true; P.poster = null; $("#aiClear").hidden = true; updateUI(); }
 
-function getCam(c){ return navigator.mediaDevices.getUserMedia({video:Object.assign({width:{ideal:1920}, height:{ideal:1080}}, c), audio:false}); }
+function getCam(c){ return navigator.mediaDevices.getUserMedia({video:Object.assign({width:{ideal:1920}, height:{ideal:1080}, frameRate:{ideal:30, max:30}}, c), audio:false}); }
 async function attachStream(){
   video.srcObject = stream; await video.play(); live = true; still = null;
   const tr = stream.getVideoTracks()[0], st = tr.getSettings?.() || {}, lab = (tr.label || "").toLowerCase();
@@ -1190,12 +1191,15 @@ async function doPolaroid(src){
   const cap = polCaption(), card = makePolaroid(src, cap);
   const o = $("#polOut"), m = Math.min(src.width, src.height), sq = canvasOf(900, 900);
   sq.getContext("2d").drawImage(src, (src.width - m)/2, (src.height - m)/2, m, m, 0, 0, 900, 900);
-  o.innerHTML = `<div class="card"><img alt="Polaroid"><p></p></div><small>Kapatmak için dokun</small>`;
+  o.innerHTML = `<div class="card"><img alt="Polaroid"><p></p></div><small>Film şeridine eklendi · kapatmak için dokun</small><button class="polx" aria-label="Kapat">✕</button>`;
   o.querySelector("img").src = sq.toDataURL("image/jpeg", .9); o.querySelector("p").textContent = cap; o.hidden = false;
+  clearTimeout(polT); polT = setTimeout(closePol, 5200);
   tick(180,.6,"sawtooth",.02); tick(90,.5,"square",.015,.1);
   await addCanvas(card, "polaroid");
 }
-$("#polOut").onclick = () => { $("#polOut").hidden = true; };
+let polT = 0;
+function closePol(){ clearTimeout(polT); const o = $("#polOut"); if (!o.hidden){ o.hidden = true; o.innerHTML = ""; } }
+$("#polOut").onclick = closePol;
 
 /* ---------- Fotokabin ---------- */
 const BOOTH = [["Klasik","#f6f3ee","#1b1714"],["Gece","#141214","#f2e9dc"],["Kırmızı","#c3352a","#fff3e8"],["Pembe","#f7b7c9","#3a1420"]];
@@ -1379,7 +1383,7 @@ function setMode(k, quiet){
   if (mode === "cift"){ DBL.a = null; }
   if (mode === "stop" && STOP.frames.length) toast("Stop motion kareleri silindi");
   STOP.frames = []; $("#onion").hidden = true; $("#onion").style.mixBlendMode = "";
-  mode = k; modeReset();
+  mode = k; closePol(); modeReset();
   if (k === "polaroid"){ arBeforePol = ari; ari = 1; layout(); renderThumbs(); }
   if (LIVE_ONLY.has(k) && still) goLive();
   document.querySelectorAll(".mode").forEach(b => b.setAttribute("aria-pressed", b.id === "m-"+k));
@@ -1414,7 +1418,7 @@ async function doPhoto(){
   if (!live){ $("#camIn").click(); return; }
   shutterSound(); flashIt();
   const {out, raw} = captureLook();
-  await addCanvas(out, "photo", {raw, rawMirror:mirror});
+  await addCanvas(out, "photo", {raw, rawMirror:mirror}); toast("Film şeridine eklendi");
 }
 async function doPolaroidShot(){
   if (!live){ $("#camIn").click(); return; }
@@ -1428,7 +1432,7 @@ async function saveStill(){
   const it = await addCanvas(out, "photo", {raw:still.full, rawMirror:still.mirror}); deliver(it.blob, it.name, out);
 }
 $("#shutter").onclick = () => {
-  if (busy) return;
+  if (busy) return; closePol();
   if (still && !still.sample) return saveStill();
   const startOnly = (mode === "video" && !recState.on) || (mode === "timelapse" && !TL.on) || ["foto","polaroid","cift","uzun","seri","bumerang"].includes(mode) && !LONG.on;
   if (timer && live && startOnly) return countdown(timer, () => ACT[mode]());
