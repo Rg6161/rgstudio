@@ -1336,7 +1336,23 @@ setTimeout(()=>toast('Hoş geldin, oyuncu!','Gezdikçe XP kazan, başarımları 
   async function start() {
     let db = null;
     try { db = window.claude && await window.claude.use('db'); } catch (e) { db = null; }
-    if (!db) { dbOk = false; loaded = true; setLive(false, 'Çevrimdışı'); renderAll(); return; }
+    if (!db) {
+      /* rgstudio.com.tr: Claude dışında veritabanı yok; haberler sitenin kendi news.json dosyasından okunur. */
+      const loadStatic = async (first) => {
+        try {
+          const r = await fetch('/news.json?t=' + Math.floor(Date.now() / 60000), { cache: 'no-store' });
+          if (!r.ok) throw new Error('news.json ' + r.status);
+          const arr = await r.json();
+          const next = sortItems(arr.map(o => normalize({ id: o.id, exists: true, data: () => o })));
+          const added = knownIds ? next.filter(i => !knownIds.has(i.id)) : [];
+          knownIds = new Set(next.map(i => i.id)); items = next; byId = new Map(items.map(i => [i.id, i]));
+          dbOk = true; loaded = true; setLive(true, 'Güncel'); renderAll();
+          if (added.length) toast(`${added.length} yeni haber eklendi`);
+          if (first) { const h = location.hash.startsWith('#haber-') ? location.hash.slice(7) : ''; if (h && byId.has(h)) openReader(h, false); }
+        } catch (e) { if (first) { dbOk = false; loaded = true; setLive(false, 'Çevrimdışı'); renderAll(); } }
+      };
+      await loadStatic(true); setInterval(() => loadStatic(false), 300000); return;
+    }
     dbOk = true;
     db.collection('news').orderBy('date', 'desc').limit(500).onSnapshot(snap => {
       const next = sortItems(snap.docs.filter(d => d.exists).map(normalize));
